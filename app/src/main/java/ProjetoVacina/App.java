@@ -3,9 +3,50 @@
  */
 package ProjetoVacina;
 
+import java.util.LinkedList;
+import java.util.Scanner;
+
+import ProjetoVacina.models.Person;
+import ProjetoVacina.models.VaccinationRecord;
 
 public class App {
     public static void main(String[] args) {
-        
+        LinkedList<Person> pessoas = new LinkedList<Person>();
+        LinkedList<VaccinationRecord> vaccinationRecords = new LinkedList<VaccinationRecord>();
+        boolean whileController = true;
+        Scanner input = new Scanner(System.in);
+
+        while(whileController){
+            int opcao = 0;
+            System.out.println("Menu de opções");  
+            System.out.println("Digite 1 para Registrar uma nova Pessoa");
+            System.out.println("Digite 2 para realizar um novo registro de vacinaçao");
+            System.out.println("Digite 3 para Sair do Programa");
+            opcao = input.nextInt();
+
+            switch(opcao){
+                case 1: 
+                    personRegister();
+                    break;
+                case 2: 
+                    recordRegister();
+                    break;
+                case 3:
+                    whileController = false;
+                    break;
+                default:
+                    System.out.println("Tentativa invalida, tente novamente...");
+            }
+
+        }
+
+    }
+
+    private static void personRegister(){
+        System.out.println("Registrar nova pessoa");
+    }
+
+    private static void recordRegister(){
+        System.out.println("Registrar novo registro");
     }
 }

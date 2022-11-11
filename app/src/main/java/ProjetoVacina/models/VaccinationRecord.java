@@ -2,15 +2,16 @@ package ProjetoVacina.models;
 
 import java.util.Date;
 
-import ProjetoVacina.models.interfaces.Dose;
+import ProjetoVacina.models.SignaturesObjects.Dose;
+import ProjetoVacina.models.SignaturesObjects.Manufacturer;
 
 public class VaccinationRecord {
     Person person;
     Date applicationDate;
     Manufacturer manufacturer;
-    String dose;
+    Dose dose;
 
-    VaccinationRecord(Person person, Date applicationDate, Manufacturer manufacture, String dose){
+    VaccinationRecord(Person person, Date applicationDate, Manufacturer manufacture, Dose dose){
         this.person = person;
         this.applicationDate = applicationDate;
         this.manufacturer = manufacture; 
