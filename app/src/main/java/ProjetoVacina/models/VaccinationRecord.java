@@ -7,10 +7,10 @@ import ProjetoVacina.models.interfaces.Dose;
 public class VaccinationRecord {
     Person person;
     Date applicationDate;
-    String manufacturer;
-    Dose dose;
+    Manufacturer manufacturer;
+    String dose;
 
-    VaccinationRecord(Person person, Date applicationDate, String manufacture, Dose dose){
+    VaccinationRecord(Person person, Date applicationDate, Manufacturer manufacture, String dose){
         this.person = person;
         this.applicationDate = applicationDate;
         this.manufacturer = manufacture; 
