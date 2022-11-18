@@ -17,4 +17,8 @@ public class Manufacturer {
     public int getDoses(){
         return this.quantDoses;
     }
+
+    public String getName(){
+        return this.name;
+    }
 }

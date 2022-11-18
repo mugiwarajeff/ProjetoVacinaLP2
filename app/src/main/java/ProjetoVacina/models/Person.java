@@ -19,8 +19,16 @@ public class Person {
     public String getCpf(){
         return this.cpf;
     }
+    public String getName(){
+        return this.name;
+    }
+    
     public void print(){
-        System.out.println("Nome = " + name + " Cpf = "+ cpf +" Sexo = " + sex.toString() + " Grupo de Prioridade = "+ priorityGroup.toString());
+        System.out.println("Nome: " + name);
+        System.out.println("CPF: " + cpf);
+        System.out.println("Sexo: " + sex.toString());
+        System.out.println("Grupo de Prioridade: " + priorityGroup.toString());
+        System.out.println("========================");
     }
 }
 

@@ -7,12 +7,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-import org.checkerframework.checker.nullness.Opt;
-
 import ProjetoVacina.models.Person;
 import ProjetoVacina.models.VaccinationRecord;
-import ProjetoVacina.models.SignaturesObjects.PriorityGroup;
-import ProjetoVacina.models.SignaturesObjects.Sexo;
 import ProjetoVacina.utils.RegisterUtils;
 import ProjetoVacina.utils.UtilPerson;
 
@@ -25,10 +21,11 @@ public class App {
 
         while(whileController){
             int opcao = 0;
-            System.out.println("Menu de opções");  
+            System.out.println("=======Menu de opções========");  
             System.out.println("Digite 1 para Registrar uma nova Pessoa");
             System.out.println("Digite 2 para realizar um novo registro de vacinaçao");
-            System.out.println("Digite 3 para imprimir todo mundo");
+            System.out.println("Digite 3 para imprimir pessoas cadastradas");
+            System.out.println("Digite 4 para imprimir registros de vacinaçao");
             System.out.println("Digite 0 para Sair do Programa");
             opcao = input.nextInt();
 
@@ -43,10 +40,10 @@ public class App {
                     RegisterUtils.recordRegister(people, vaccinationRecords, input);
                     break;
                 case 3:
-                    Iterator<VaccinationRecord> iteratorPerson = vaccinationRecords.iterator();
-                    while(iteratorPerson.hasNext()){
-                        iteratorPerson.next().Print();
-                    }
+                    showPeoples(people);
+                    break;
+                case 4: 
+                    showRecords(vaccinationRecords);
                     break;
                 case 0:
                     whileController = false;
@@ -56,5 +53,27 @@ public class App {
             }
         }
 
+    }
+
+    private static void showPeoples(LinkedList<Person> people){
+        Iterator<Person> iteratorPerson = people.iterator();
+        int cont = 1;
+
+        while(iteratorPerson.hasNext()){
+            System.out.printf("PESSOA %d \n", cont);
+            iteratorPerson.next().print();
+            cont++;
+        }
+    }
+
+    private static void showRecords(LinkedList<VaccinationRecord> vaccinationRecords){
+        Iterator<VaccinationRecord> vaccinationIterator = vaccinationRecords.iterator();
+        int cont = 1;
+
+        while(vaccinationIterator.hasNext()){
+            System.out.printf("REGISTRO %d \n", cont);
+            vaccinationIterator.next().print();
+            cont++;
+        }
     }
 }

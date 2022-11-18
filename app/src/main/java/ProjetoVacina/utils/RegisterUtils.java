@@ -28,6 +28,7 @@ public class RegisterUtils {
 
             if(person != null){
                 cpfSearchError = false;
+                System.out.printf("Pessoa selecionada: %s \n", person.getName());
             }else{
                 System.out.println("Valor digitado é invalido, tente novamente!");
             }
@@ -37,27 +38,29 @@ public class RegisterUtils {
             System.out.println("Pessoa ja está totalmente vacinada");
         }else{
             manufacturer = haveOneDose(person, vaccinationRecords);
-            System.out.println(manufacturer);
             if(manufacturer == null){
                 boolean manufacturerError = true;
                 while(manufacturerError){
                     showManufacturesList();
                     option = input.nextInt();
                     manufacturer = selectManufacture(option);
-
+                   
                     if(manufacturer != null){
                        manufacturerError = false;
+                       System.out.printf("Fornecedor selecionado: %s\n", manufacturer.getName());
                     }else{
                         System.out.println("Valor invalido, selecione novamente");
                     }
                 }
 
                 dose = testDose(option);
+                System.out.println("Primeira dose aplicada");
                 VaccinationRecord vacinationRecord = new VaccinationRecord(person, date, manufacturer, dose);
                 vaccinationRecords.add(vacinationRecord);
                 
             }else{
                 dose = Dose.second;
+                System.out.println("Segunda dose aplicada");
                 VaccinationRecord vacinationRecord = new VaccinationRecord(person, date, manufacturer, dose);
                 vaccinationRecords.add(vacinationRecord);
             }
@@ -106,6 +109,7 @@ public class RegisterUtils {
     }
 
     private static void showManufacturesList(){
+        System.out.println("Escolha uma opçao de vacina: ");
         System.out.println("1 - Sinovac");
         System.out.println("2 - AstraZenece");
         System.out.println("3 - Pfizer");

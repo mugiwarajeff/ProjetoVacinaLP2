@@ -35,9 +35,11 @@ public class VaccinationRecord {
         return dosetemp == manufacturer.getDoses();
     }
 
-    public void Print(){
-        person.print();
-        System.out.println("Data = " + applicationDate + " Empresa = "+ manufacturer +" dose = " + dose);
+    public void print(){
+        System.out.println("Pessoa: " + person.getName());
+        System.out.println("Data de aplicaçao: " + applicationDate);
+        System.out.println("Fornecedor de vacina: " + manufacturer.getName());
+        System.out.println("Dose: " + dose.getTipo());
     }
 
 }
