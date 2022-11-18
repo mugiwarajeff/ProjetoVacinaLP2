@@ -74,17 +74,6 @@ public class UtilPerson {
 
     }
 
-    private static boolean cpfValidator(String cpf){
-        Pattern pattern = Pattern.compile("[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}", Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(cpf);
-        boolean matchFound = matcher.find();
-        if(matchFound) {
-            return true;
-          } else {
-            return false;
-          }
-    }
-
     private static void listSexoOptions(){
         System.out.println("1 - Homem");
         System.out.println("2 - Mulher");
@@ -144,4 +133,16 @@ public class UtilPerson {
 
         return true;
     }
+
+    private static boolean cpfValidator(String cpf){
+        Pattern pattern = Pattern.compile("[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(cpf);
+        boolean matchFound = matcher.find();
+        if(matchFound) {
+            return true;
+          } else {
+            return false;
+          }
+    }
+
 }
