@@ -3,6 +3,8 @@ package ProjetoVacina.utils;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import ProjetoVacina.models.Person;
 import ProjetoVacina.models.SignaturesObjects.PriorityGroup;
@@ -24,13 +26,17 @@ public class UtilPerson {
         while(cpfError){
             System.out.print("Digite o CPF da pessoa: ");
             cpf = input.nextLine();
-
+            cpfValidator(cpf);
             if(!cpfVerify(cpf, people)){
                 System.out.println("CPF ja existente... cadastre novamente");
-                
             }
             else{
-                cpfError = false;
+                if (cpfValidator(cpf)){
+                    cpfError = false;
+                }else {
+                    System.out.println("CPF digitado nos padroes incorretos");
+                }
+                
             }
         }
         
@@ -68,7 +74,16 @@ public class UtilPerson {
 
     }
 
-    
+    private static boolean cpfValidator(String cpf){
+        Pattern pattern = Pattern.compile("[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(cpf);
+        boolean matchFound = matcher.find();
+        if(matchFound) {
+            return true;
+          } else {
+            return false;
+          }
+    }
 
     private static void listSexoOptions(){
         System.out.println("1 - Homem");
@@ -118,7 +133,7 @@ public class UtilPerson {
                 return null;
         }
     }
-
+    
     private static boolean cpfVerify(String cpf, LinkedList<Person> people){
         Iterator<Person> personIterator = people.iterator();
 
