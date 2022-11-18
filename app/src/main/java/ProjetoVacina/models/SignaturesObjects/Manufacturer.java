@@ -9,8 +9,12 @@ public class Manufacturer {
         this.quantDoses = quantDoses;
     }
 
-    final static Manufacturer sinovac = new Manufacturer("Sinovac", 2);
-    final static Manufacturer astraZeneca = new Manufacturer("AstraZeneca", 2);
-    final static Manufacturer pfizer = new Manufacturer("Pfizer", 2);
-    final static Manufacturer Janssen = new Manufacturer("Janssen", 1);
+    public final static Manufacturer sinovac = new Manufacturer("Sinovac", 2);
+    public final static Manufacturer astraZeneca = new Manufacturer("AstraZeneca", 2);
+    public final static Manufacturer pfizer = new Manufacturer("Pfizer", 2);
+    public final static Manufacturer Janssen = new Manufacturer("Janssen", 1);
+
+    public int getDoses(){
+        return this.quantDoses;
+    }
 }

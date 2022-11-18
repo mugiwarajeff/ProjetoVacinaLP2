@@ -15,5 +15,12 @@ public class Person {
         this.sex = sex;
         this.priorityGroup = priorityGroup;
     }
+
+    public String getCpf(){
+        return this.cpf;
+    }
+    public void print(){
+        System.out.println("Nome = " + name + " Cpf = "+ cpf +" Sexo = " + sex.toString() + " Grupo de Prioridade = "+ priorityGroup.toString());
+    }
 }
 

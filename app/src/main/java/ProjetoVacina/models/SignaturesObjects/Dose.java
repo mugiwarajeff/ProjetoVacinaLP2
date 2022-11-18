@@ -8,7 +8,10 @@ public class Dose {
         this.tipo = tipo;
     }
 
-    final static Dose firts = new Dose("Primeira");
-    final static Dose second = new Dose("Segunda");
-    final static Dose unique = new Dose("Unica");
+    public String getTipo(){
+        return this.tipo;
+    }
+    public final static Dose firts = new Dose("Primeira");
+    public final static Dose second = new Dose("Segunda");
+    public final static Dose unique = new Dose("Unica");
 }

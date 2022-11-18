@@ -3,15 +3,22 @@
  */
 package ProjetoVacina;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+import org.checkerframework.checker.nullness.Opt;
+
 import ProjetoVacina.models.Person;
 import ProjetoVacina.models.VaccinationRecord;
+import ProjetoVacina.models.SignaturesObjects.PriorityGroup;
+import ProjetoVacina.models.SignaturesObjects.Sexo;
+import ProjetoVacina.utils.RegisterUtils;
+import ProjetoVacina.utils.UtilPerson;
 
 public class App {
     public static void main(String[] args) {
-        LinkedList<Person> pessoas = new LinkedList<Person>();
+        LinkedList<Person> people = new LinkedList<Person>();
         LinkedList<VaccinationRecord> vaccinationRecords = new LinkedList<VaccinationRecord>();
         boolean whileController = true;
         Scanner input = new Scanner(System.in);
@@ -21,32 +28,33 @@ public class App {
             System.out.println("Menu de opções");  
             System.out.println("Digite 1 para Registrar uma nova Pessoa");
             System.out.println("Digite 2 para realizar um novo registro de vacinaçao");
-            System.out.println("Digite 3 para Sair do Programa");
+            System.out.println("Digite 3 para imprimir todo mundo");
+            System.out.println("Digite 0 para Sair do Programa");
             opcao = input.nextInt();
 
             switch(opcao){
                 case 1: 
-                    personRegister();
+                    input.nextLine();
+                    UtilPerson.personRegister(people, input);
+                    System.out.println("Pessoa cadastrada com sucesso!");
                     break;
                 case 2: 
-                    recordRegister();
+                    input.nextLine();
+                    RegisterUtils.recordRegister(people, vaccinationRecords, input);
                     break;
                 case 3:
+                    Iterator<VaccinationRecord> iteratorPerson = vaccinationRecords.iterator();
+                    while(iteratorPerson.hasNext()){
+                        iteratorPerson.next().Print();
+                    }
+                    break;
+                case 0:
                     whileController = false;
                     break;
                 default:
                     System.out.println("Tentativa invalida, tente novamente...");
             }
-
         }
 
-    }
-
-    private static void personRegister(){
-        System.out.println("Registrar nova pessoa");
-    }
-
-    private static void recordRegister(){
-        System.out.println("Registrar novo registro");
     }
 }
