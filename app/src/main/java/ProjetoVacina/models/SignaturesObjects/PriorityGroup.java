@@ -17,27 +17,6 @@ public class PriorityGroup {
     public final static PriorityGroup EDUCATION_GROUP = new PriorityGroup("Trabalhador da educação");
 
     public String toString(){
-    if(tipo == "Trabalhador da Saúde"){
-        return "Trabalhador da Saúde";
-    }
-    if(tipo == "Portador de idade igual ou superior a 60 anos"){
-        return "Portador de idade igual ou superior a 60 anos";
-    }
-    if(tipo == "Indígena residente em terras indígenas"){
-        return "Indígena residente em terras indígenas";
-    }
-    if(tipo == "Portador de comorbidades"){
-        return "Portador de comorbidades";
-    }
-    if(tipo == "Funcionário do sistema de privação de liberdade"){
-        return "Funcionário do sistema de privação de liberdade";
-    }
-    if(tipo == "Membro de forças de segurança e salvamento"){
-        return "Membro de forças de segurança e salvamento";
-    }
-    if(tipo == "Trabalhador da educação"){
-        return "Trabalhador da educação";
-    }
-    return null;
+    return this.tipo;
  }
 }
