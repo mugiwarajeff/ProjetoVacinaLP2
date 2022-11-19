@@ -8,7 +8,7 @@ public class Person {
     private String cpf;
     private Sexo sex;
     private PriorityGroup priorityGroup;
-
+    private boolean isVaccinated = false;
     public Person(String name, String cpf, Sexo sex, PriorityGroup priorityGroup){
         this.name = name;
         this.cpf = cpf;
@@ -21,6 +21,14 @@ public class Person {
     }
     public String getName(){
         return this.name;
+    }
+
+    public boolean getIsVaccined(){
+        return this.isVaccinated;
+    }
+
+    public void setIsVaccinated(boolean isVaccinated){
+        this.isVaccinated = isVaccinated;
     }
     
     public void print(){

@@ -15,6 +15,8 @@ import ProjetoVacina.utils.UtilPerson;
 public class App {
     public static void main(String[] args) {
         LinkedList<Person> people = new LinkedList<Person>();
+        LinkedList<Person> inWait = new LinkedList<Person>();
+        LinkedList<Person> completeds = new LinkedList<Person>();
         LinkedList<VaccinationRecord> vaccinationRecords = new LinkedList<VaccinationRecord>();
         boolean whileController = true;
         Scanner input = new Scanner(System.in);
@@ -24,26 +26,38 @@ public class App {
             System.out.println("=======Menu de opções========");  
             System.out.println("Digite 1 para Registrar uma nova Pessoa");
             System.out.println("Digite 2 para realizar um novo registro de vacinaçao");
-            System.out.println("Digite 3 para imprimir pessoas cadastradas");
-            System.out.println("Digite 4 para imprimir registros de vacinaçao");
+            System.out.println("Digite 3 para pesquisar pessoa cadastradas");
+            System.out.println("Digite 4 para pesquisar pessoa cadastradas");
+            System.out.println("Digite 5 para imprimir registros de vacinaçao");
+            System.out.println("Digite 6 para Dados das vacinas");
             System.out.println("Digite 0 para Sair do Programa");
             opcao = input.nextInt();
 
             switch(opcao){
                 case 1: 
                     input.nextLine();
-                    UtilPerson.personRegister(people, input);
+                    UtilPerson.personRegister(people, inWait, input);
                     System.out.println("Pessoa cadastrada com sucesso!");
                     break;
                 case 2: 
                     input.nextLine();
-                    RegisterUtils.recordRegister(people, vaccinationRecords, input);
+                    RegisterUtils.recordRegister(people, vaccinationRecords, inWait, completeds, input);
                     break;
                 case 3:
-                    showPeoples(people);
+                    input.nextLine();
+                    searchPerson(vaccinationRecords, input);
                     break;
                 case 4: 
+                    input.nextLine();
+                    showPeoplewithoutVaccine(inWait);
+                    break;
+                case 5:
                     showRecords(vaccinationRecords);
+                    break;
+                case 6:
+                    int optionMenu = input.nextInt();
+                    showOption();
+                    selectedOption(optionMenu, people, vaccinationRecords);
                     break;
                 case 0:
                     whileController = false;
@@ -55,7 +69,52 @@ public class App {
 
     }
 
-    private static void showPeoples(LinkedList<Person> people){
+    private static void showOption(){
+        System.out.println("1 - Quantidade de pessoas registradas que concluiram ciclo de imunização");
+        System.out.println("2 - Percentual de pessoas registradas por grupo prioritario que ainda não iniciaram ciclo de imunização");
+        System.out.println("3 - Percentual de cobertura vacinal considerando conjunto de pessoas registradas dentre aquelas que concluiram ciclo de imunização");
+        System.out.println("4 - Percentual de cobertura vacinal por grupo prioritario");
+        System.out.println("5 - Quantidade de registro de aplicação de dose por vacinante");
+    }
+
+    private static void selectedOption(int option, LinkedList<Person> people, LinkedList<VaccinationRecord> vaccinationRecords){
+        switch(option){
+            case 1:
+                System.out.println(isFullVaccinated(people, vaccinationRecords));
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5: 
+                break;
+            default:
+                System.out.println("valor invalido!");
+        }
+    }
+
+    private static int isFullVaccinated(LinkedList<Person> people, LinkedList<VaccinationRecord> vaccinationRecords){
+        int quant = 0;
+        Iterator<Person> peopleIterator = people.iterator();
+        while(peopleIterator.hasNext()){
+            Person personTemp = peopleIterator.next();
+            Iterator<VaccinationRecord> vaccinationIterator = vaccinationRecords.iterator();
+            while(vaccinationIterator.hasNext()){
+            VaccinationRecord vaccinationTemp = vaccinationIterator.next();
+
+           if(vaccinationTemp.getPerson().equals(personTemp)){
+                if(vaccinationTemp.isFullVaccinated()) 
+                quant++;
+            }
+        }
+
+        }
+        
+        return quant;
+    } 
+    private static void showPeople(LinkedList<Person> people){
         Iterator<Person> iteratorPerson = people.iterator();
         int cont = 1;
 
@@ -74,6 +133,39 @@ public class App {
             System.out.printf("REGISTRO %d \n", cont);
             vaccinationIterator.next().print();
             cont++;
+        }
+    }
+
+    private static void searchPerson(LinkedList<VaccinationRecord> vaccinationRecords, Scanner input){
+        System.out.println("Digite o CPF a ser pesquisado");
+        String cpfSearch = input.nextLine();
+        Iterator<VaccinationRecord> vaccinationIterator = vaccinationRecords.iterator();
+        boolean isEmpty = true;
+
+        while(vaccinationIterator.hasNext()){
+            VaccinationRecord vaccinationTemp = vaccinationIterator.next();
+            if(vaccinationTemp.getPerson().getCpf().equals(cpfSearch)){
+                vaccinationTemp.print();
+                isEmpty = false;
+            }
+        }
+
+        if(isEmpty){
+            System.out.println("Nenhum registro para o CPF pesquisado");
+        }
+
+    }
+
+    private static void showPeoplewithoutVaccine(LinkedList<Person> inWait){
+        Iterator<Person> personIterator = inWait.iterator();
+        
+        if(!inWait.isEmpty()){
+            while(personIterator.hasNext()){
+                personIterator.next().print();
+    
+            }
+        }else{
+            System.out.println("Todas as pessoas registradas estão vacinadas");
         }
     }
 }

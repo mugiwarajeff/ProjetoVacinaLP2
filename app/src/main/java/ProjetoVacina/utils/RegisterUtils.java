@@ -11,7 +11,8 @@ import ProjetoVacina.models.SignaturesObjects.Dose;
 import ProjetoVacina.models.SignaturesObjects.Manufacturer;
 
 public class RegisterUtils {
-    public static void recordRegister(LinkedList<Person> people, LinkedList<VaccinationRecord> vaccinationRecords, Scanner input){
+    public static void recordRegister(LinkedList<Person> people, LinkedList<VaccinationRecord> vaccinationRecords,
+    LinkedList<Person> inWait, LinkedList<Person> completeds, Scanner input){
         System.out.println("Registrar novo registro");
         String cpfOfPerson;
         Person person=null;
@@ -25,7 +26,6 @@ public class RegisterUtils {
             System.out.println("Digite o CPF da pessoa que deseja vacinar");
             cpfOfPerson = input.nextLine();
             person = searchPerson(people, cpfOfPerson);
-
             if(person != null){
                 cpfSearchError = false;
                 System.out.printf("Pessoa selecionada: %s \n", person.getName());
@@ -35,6 +35,7 @@ public class RegisterUtils {
 
         }
         if(isFullVaccinated(person, vaccinationRecords)){
+            
             System.out.println("Pessoa ja está totalmente vacinada");
         }else{
             manufacturer = haveOneDose(person, vaccinationRecords);
@@ -55,12 +56,15 @@ public class RegisterUtils {
 
                 dose = testDose(option);
                 System.out.println("Primeira dose aplicada");
+                person.setIsVaccinated(true);
                 VaccinationRecord vacinationRecord = new VaccinationRecord(person, date, manufacturer, dose);
+                inWait.remove(person);
                 vaccinationRecords.add(vacinationRecord);
                 
             }else{
                 dose = Dose.second;
                 System.out.println("Segunda dose aplicada");
+
                 VaccinationRecord vacinationRecord = new VaccinationRecord(person, date, manufacturer, dose);
                 vaccinationRecords.add(vacinationRecord);
             }

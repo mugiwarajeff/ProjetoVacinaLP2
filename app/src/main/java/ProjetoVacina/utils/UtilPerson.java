@@ -12,7 +12,7 @@ import ProjetoVacina.models.SignaturesObjects.Sexo;
 
 public class UtilPerson {
 
-    public static void personRegister(LinkedList<Person> people, Scanner input){
+    public static void personRegister(LinkedList<Person> people, LinkedList<Person> inWait, Scanner input){
         int option = 0;
         String name;
         String cpf = null;
@@ -70,7 +70,9 @@ public class UtilPerson {
         }
 
         Person newPerson = new Person(name, cpf, sexo, priorityGroup);
+        inWait.add(newPerson);
         people.add(newPerson);
+
 
     }
 
