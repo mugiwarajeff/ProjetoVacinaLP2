@@ -11,8 +11,7 @@ import ProjetoVacina.models.SignaturesObjects.Dose;
 import ProjetoVacina.models.SignaturesObjects.Manufacturer;
 
 public class RegisterUtils {
-    public static void recordRegister(LinkedList<Person> people, LinkedList<VaccinationRecord> vaccinationRecords,
-    LinkedList<Person> inWait, LinkedList<Person> completeds, Scanner input){
+    public static void recordRegister(LinkedList<Person> people, LinkedList<VaccinationRecord> vaccinationRecords, Scanner input){
         System.out.println("Registrar novo registro");
         String cpfOfPerson;
         Person person=null;
@@ -56,9 +55,7 @@ public class RegisterUtils {
 
                 dose = testDose(option);
                 System.out.println("Primeira dose aplicada");
-                person.setIsVaccinated(true);
                 VaccinationRecord vacinationRecord = new VaccinationRecord(person, date, manufacturer, dose);
-                inWait.remove(person);
                 vaccinationRecords.add(vacinationRecord);
                 
             }else{
