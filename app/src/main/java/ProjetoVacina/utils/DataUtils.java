@@ -1,11 +1,7 @@
 package ProjetoVacina.utils;
 
-import java.util.LinkedList;
 import java.util.Scanner;
-
 import ProjetoVacina.Repository.Repository;
-import ProjetoVacina.models.Person;
-import ProjetoVacina.models.VaccinationRecord;
 
 public class DataUtils {
 
