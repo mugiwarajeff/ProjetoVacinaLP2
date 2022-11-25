@@ -6,6 +6,7 @@ import java.util.Scanner;
 import ProjetoVacina.models.Person;
 import ProjetoVacina.models.VaccinationRecord;
 import ProjetoVacina.models.SignaturesObjects.Dose;
+import ProjetoVacina.models.SignaturesObjects.PriorityGroup;
 
 public class Repository {
     
@@ -114,5 +115,59 @@ public class Repository {
         boolean isThePerson = vaccinationRecord.getPerson().getCpf().equals(person.getCpf());
         boolean haveFinishedDose = (vaccinationRecord.getDose() == Dose.unique || vaccinationRecord.getDose() == Dose.second);
         return isThePerson && haveFinishedDose;
+    }
+
+    public double[] percentPerPriorityGroupWithoutVaccination(){
+        double[] quantities = new double[7];
+
+        Iterator<Person> personIterator = people.iterator();
+        while(personIterator.hasNext()){
+            Person personTemp = personIterator.next();
+            if(personTemp.getIsVaccinated() == false){
+                addQuantToArrayQuants(quantities, personTemp);
+            }
+        }
+
+        return transformQuantToPercent(quantities);
+    }
+
+    private void addQuantToArrayQuants(double[] quantities, Person person){
+        if(person.getPriorityGroup().getTipo().equals(PriorityGroup.HEALH_GROUP.getTipo())) quantities[0]++;
+        else if(person.getPriorityGroup().getTipo().equals(PriorityGroup.OLDER_GROUP.getTipo())) quantities[1]++;
+        else if(person.getPriorityGroup().getTipo().equals(PriorityGroup.INDIGENA_GROUP.getTipo())) quantities[2]++;
+        else if(person.getPriorityGroup().getTipo().equals(PriorityGroup.COMORBITIES_GROUP.getTipo())) quantities[3]++;
+        else if(person.getPriorityGroup().getTipo().equals(PriorityGroup.PRISON_GROUP.getTipo())) quantities[4]++;
+        else if(person.getPriorityGroup().getTipo().equals(PriorityGroup.SECURITY_GROUP.getTipo())) quantities[5]++;
+        else if(person.getPriorityGroup().getTipo().equals(PriorityGroup.EDUCATION_GROUP.getTipo())) quantities[6]++;
+    }
+
+    private double[] transformQuantToPercent(double[] quantities){
+        double[] percents = new double[7];
+
+        for(int i = 0; i < quantities.length; i++){
+            try{
+                percents[i] = (quantities[i] / this.people.size()) * 100;
+            }catch (ArithmeticException e){
+                percents[i] = 0.0;
+            }
+           
+        }
+
+        return percents;
+    }
+
+    public double percentOfCompleteVaccination(){
+       double quantPersonsFullVaccinated = getQuantPersonsFullVaccinated();
+       
+        try{
+            double percentOfPersonsFullVaccinated = (quantPersonsFullVaccinated / this.people.size()) * 100;
+            System.out.println(percentOfPersonsFullVaccinated);
+            System.out.println(quantPersonsFullVaccinated);
+            System.out.println(this.people.size());
+            if (Double.isNaN(percentOfPersonsFullVaccinated)) return 0.0;
+            return percentOfPersonsFullVaccinated;
+        }catch (ArithmeticException e){
+            return 0.0;
+        }
     }
 }

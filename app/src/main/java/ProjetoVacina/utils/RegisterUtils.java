@@ -74,6 +74,7 @@ public class RegisterUtils {
         while(personIterator.hasNext()){
             Person personTemp = personIterator.next();
             if(personTemp.getCpf().equals(cpfSearch)){
+                personTemp.setIsVaccinated(true);
                 return personTemp;
             }
         }

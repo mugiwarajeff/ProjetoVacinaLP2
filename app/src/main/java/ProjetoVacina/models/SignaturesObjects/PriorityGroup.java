@@ -7,6 +7,9 @@ public class PriorityGroup {
         this.tipo = tipo;
     }
 
+    public String getTipo(){
+        return this.tipo;
+    }
 
     public final static PriorityGroup HEALH_GROUP = new PriorityGroup("Trabalhador da Saúde");
     public final static PriorityGroup OLDER_GROUP = new PriorityGroup("Portador de idade igual ou superior a 60 anos");

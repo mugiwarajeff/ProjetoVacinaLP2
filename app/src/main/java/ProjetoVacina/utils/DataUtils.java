@@ -21,8 +21,10 @@ public class DataUtils {
                 showQuantPersonWithoutCompleteVaccination(repository);
                 break;
             case 2:
+                showPercentPerPriorityGroupWithouVaccination(repository);
                 break;
             case 3:
+                showPercentOfCompleteVaccination(repository);
                 break;
             case 4:
                 break;
@@ -35,6 +37,23 @@ public class DataUtils {
 
     private static void showQuantPersonWithoutCompleteVaccination(Repository repository){
         System.out.printf("%d pessoas terminaram o ciclo de vacinaçao \n", repository.getQuantPersonsFullVaccinated());
+    }
+
+    private static void showPercentPerPriorityGroupWithouVaccination(Repository repository){
+        double[] percents = repository.percentPerPriorityGroupWithoutVaccination();
+        System.out.println("Percentual de pessoas que nao iniciaram ciclo de vacinaçao");
+        System.out.printf("Profissionais da Saude: %.2f%%\n", percents[0]);
+        System.out.printf("Pessoas mais velhas: %.2f%%\n",percents[1]);
+        System.out.printf("Grupos indigenas: %.2f%%\n", percents[2]);
+        System.out.printf("Grupos com comorbidades: %.2f%%\n", percents[3]);
+        System.out.printf("Funcionarios de presidios: %.2f%%\n", percents[4]);
+        System.out.printf("Grupo de segurança publica: %.2f%%\n", percents[5]);
+        System.out.printf("Profissionais da educaçao: %.2f%%\n", percents[6]);
+    }
+
+    private static void showPercentOfCompleteVaccination(Repository repository){
+        
+        System.out.printf("Percentual de pessoas totalmente vacinadas: %.2f%%\n", repository.percentOfCompleteVaccination());
     }
 
     
