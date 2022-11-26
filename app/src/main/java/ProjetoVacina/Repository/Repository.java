@@ -6,6 +6,7 @@ import java.util.Scanner;
 import ProjetoVacina.models.Person;
 import ProjetoVacina.models.VaccinationRecord;
 import ProjetoVacina.models.SignaturesObjects.Dose;
+import ProjetoVacina.models.SignaturesObjects.Manufacturer;
 import ProjetoVacina.models.SignaturesObjects.PriorityGroup;
 
 public class Repository {
@@ -111,11 +112,13 @@ public class Repository {
         return false;
     }
 
+
     private boolean isFinishedDose(VaccinationRecord vaccinationRecord, Person person){
         boolean isThePerson = vaccinationRecord.getPerson().getCpf().equals(person.getCpf());
         boolean haveFinishedDose = (vaccinationRecord.getDose() == Dose.unique || vaccinationRecord.getDose() == Dose.second);
         return isThePerson && haveFinishedDose;
     }
+
 
     public double[] percentPerPriorityGroupWithoutVaccination(){
         double[] quantities = new double[7];
@@ -124,14 +127,14 @@ public class Repository {
         while(personIterator.hasNext()){
             Person personTemp = personIterator.next();
             if(personTemp.getIsVaccinated() == false){
-                addQuantToArrayQuants(quantities, personTemp);
+                addQuantToArrayQuantsOfPerson(quantities, personTemp);
             }
         }
 
         return transformQuantToPercent(quantities);
     }
 
-    private void addQuantToArrayQuants(double[] quantities, Person person){
+    private void addQuantToArrayQuantsOfPerson(double[] quantities, Person person){
         if(person.getPriorityGroup().getTipo().equals(PriorityGroup.HEALH_GROUP.getTipo())) quantities[0]++;
         else if(person.getPriorityGroup().getTipo().equals(PriorityGroup.OLDER_GROUP.getTipo())) quantities[1]++;
         else if(person.getPriorityGroup().getTipo().equals(PriorityGroup.INDIGENA_GROUP.getTipo())) quantities[2]++;
@@ -141,12 +144,20 @@ public class Repository {
         else if(person.getPriorityGroup().getTipo().equals(PriorityGroup.EDUCATION_GROUP.getTipo())) quantities[6]++;
     }
 
+    private void addQuantToArrayQuantsOfRecords(int[] quantities, VaccinationRecord vaccination){
+        if(vaccination.getManufacture().getName().equals(Manufacturer.sinovac.getName())) quantities[0]++;
+        else if(vaccination.getManufacture().getName().equals(Manufacturer.astraZeneca.getName())) quantities[1]++;
+        else if(vaccination.getManufacture().getName().equals(Manufacturer.pfizer.getName())) quantities[2]++;
+        else if(vaccination.getManufacture().getName().equals(Manufacturer.Janssen.getName())) quantities[3]++;
+    }
     private double[] transformQuantToPercent(double[] quantities){
         double[] percents = new double[7];
 
         for(int i = 0; i < quantities.length; i++){
             try{
-                percents[i] = (quantities[i] / this.people.size()) * 100;
+                double toPercent = (quantities[i] / this.people.size()) * 100;
+                if (Double.isNaN(toPercent))percents[i] = 0;
+                else percents[i] = toPercent;
             }catch (ArithmeticException e){
                 percents[i] = 0.0;
             }
@@ -170,4 +181,45 @@ public class Repository {
             return 0.0;
         }
     }
+
+    public double[] getPercentOfVaccinationByPriorityGroup(){
+        double[] quantities = new double[7];
+        Iterator<Person> personIterator = this.people.iterator();
+
+        while(personIterator.hasNext()){
+            Person personTemp = personIterator.next();
+            if(personHaveAnyVaccination(personTemp)){
+                addQuantToArrayQuantsOfPerson(quantities, personTemp);
+            }
+        }
+
+        return transformQuantToPercent(quantities);
+    }
+
+    private boolean personHaveAnyVaccination(Person person){
+        Iterator<VaccinationRecord> vaccinationIterator = this.vaccinationRecords.iterator();
+
+        while(vaccinationIterator.hasNext()){
+            VaccinationRecord vaccinationTemp = vaccinationIterator.next();
+            if(person.getCpf() == vaccinationTemp.getPerson().getCpf()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int[] getQuantApplicationsPerManufacture(){
+        int[] quantities = new int[4];
+
+        Iterator<VaccinationRecord> vaccinationIterator = this.vaccinationRecords.iterator();
+
+        while(vaccinationIterator.hasNext()){
+            VaccinationRecord vaccinationTemp = vaccinationIterator.next();
+            addQuantToArrayQuantsOfRecords(quantities, vaccinationTemp);
+        }
+
+        return quantities;
+    }
+
+
 }
