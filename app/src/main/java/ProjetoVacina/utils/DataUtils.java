@@ -54,7 +54,6 @@ public class DataUtils {
     }
 
     private static void showPercentOfCompleteVaccination(Repository repository){
-        
         System.out.printf("Percentual de pessoas totalmente vacinadas: %.2f%%\n", repository.percentOfCompleteVaccination());
     }
 
