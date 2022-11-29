@@ -1,0 +1,11 @@
+mineira;543-543-543-54;Feminino;Trabalhador da educação;false
+marco;321-534-234-98;Masculino;Indígena residente em terras indígenas;false
+cleide;777-777-777-77;Feminino;Portador de idade igual ou superior a 60 anos;true
+celma;888-888-888-88;Feminino;Membro de forças de segurança e salvamento;false
+joao;222-222-222-22;Masculino;Funcionário do sistema de privação de liberdade;true;Tue Nov 29 12:24:55 BRT 2022;AstraZeneca;2;Primeira
+jeff;234-234-234-23;Masculino;Indígena residente em terras indígenas;true;Tue Nov 29 15:07:42 BRT 2022;Pfizer;2;Primeira
+jeff;234-234-234-23;Masculino;Indígena residente em terras indígenas;true;Tue Nov 29 15:08:36 BRT 2022;Pfizer;2;Segunda
+tamara;123-123-123-12;Feminino;Trabalhador da Saúde;true;Tue Nov 29 15:07:14 BRT 2022;Janssen;1;Unica
+paulo;555-555-555-55;Masculino;Portador de comorbidades;true;Tue Nov 29 16:51:23 BRT 2022;Sinovac;2;Primeira
+jacso;666-666-666-666-66;Masculino;Portador de comorbidades;true;Tue Nov 29 17:01:41 BRT 2022;AstraZeneca;2;Primeira
+cleide;777-777-777-77;Feminino;Portador de idade igual ou superior a 60 anos;true;Tue Nov 29 17:02:36 BRT 2022;Janssen;1;Unica

@@ -1,4 +1,0 @@
-tamara;123-123-123-12;Feminino;Ind�gena residente em terras ind�genas;true
-jeff;234-234-234-23;Masculino;Ind�gena residente em terras ind�genas;true
-mineira;543-543-543-54;Feminino;Trabalhador da educa��o;false
-marco;321-534-234-98;Masculino;Ind�gena residente em terras ind�genas;false

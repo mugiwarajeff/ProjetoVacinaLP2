@@ -17,8 +17,7 @@ public class App {
         boolean whileController = true;
         Scanner input = new Scanner(System.in);
 
-        repository.readBdp();
-        repository.readBdv();
+        repository.readBd();
         while(whileController){
             int opcao = 0;
             System.out.println("=======Menu de opções========");  
@@ -62,7 +61,6 @@ public class App {
                     System.out.println("Tentativa invalida, tente novamente...");
             }
         }
-        repository.writeBdp();
-        repository.writeBdp();
+        repository.writeBd();
     }
 }

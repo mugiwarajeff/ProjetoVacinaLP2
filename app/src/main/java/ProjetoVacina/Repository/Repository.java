@@ -2,7 +2,6 @@ package ProjetoVacina.Repository;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -23,9 +22,9 @@ public class Repository {
     
     private LinkedList<Person> people = new LinkedList<Person>();
     private LinkedList<VaccinationRecord> vaccinationRecords = new LinkedList<VaccinationRecord>();
-
-    public void readBdp(){
-        File file = new File("BDP.txt");
+  
+    public void readBd(){
+        File file = new File("BD.txt");
         FileInputStream fi;
         try {
             fi = new FileInputStream(file);
@@ -70,123 +69,64 @@ public class Repository {
                         default :
                             prit = null;
                             
-                        }
-                        ps.setPriorityGroup(prit);
-                        if(dados[4].charAt(0) == 'f'){
-                            ps.setIsVaccinated(false);
-                            people.add(ps);
-                        }else{
-                            ps.setIsVaccinated(true);
-                        }
-                            
                     }
+                    ps.setPriorityGroup(prit);
+                    if(dados[4].charAt(0) == 'f'){
+                        ps.setIsVaccinated(false);
+                        people.add(ps);
+                    }else{
+                        ps.setIsVaccinated(true);
+                    }
+                    try {
+                        VaccinationRecord vr = new VaccinationRecord(ps, null, null, null);
+                        SimpleDateFormat datat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
+                        Date datet = datat.parse(dados[5]);
+                        vr.setApplicationDate(datet);
+                        Manufacturer mt;
+                        switch(dados[6]){
+                            case "Sinovac":
+                                mt = Manufacturer.sinovac;
+                                break;
+                            case "AstraZeneca":
+                                mt = Manufacturer.astraZeneca;
+                                break;
+                            case "Pfizer":
+                                mt = Manufacturer.pfizer;
+                                break;
+                            case "Janssen":
+                                mt = Manufacturer.Janssen;
+                                break;
+                            default:
+                                mt = null;
+                        }
+                        vr.setManufacturer(mt);
+                        Dose ds;
+                        switch(dados[8]){
+                            case "Primeira":
+                                ds = Dose.firts;
+                                break;
+                            case "Segunda":
+                                ds = Dose.second;
+                                break;
+                            case "Unica":
+                                ds = Dose.unique;
+                                break;
+                            default:
+                                ds = null;
+                        }
+                        vr.setDose(ds);
+                        vaccinationRecords.add(vr);
+                    } catch (Exception e) {}
                 }
-            sc1.close();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }    
-    }   
-    public void readBdv(){
-        File file = new File("BDV.txt");
-        FileInputStream fi;
-        try {
-            fi = new FileInputStream(file);
-            Scanner sc1 = new Scanner(fi, "UTF-8");
-            while(sc1.hasNext()){
-                String linha = sc1.nextLine();
-                if(linha != null && !linha.isEmpty()){
-                    String[] dados = linha.split("\\;");
-                    Person ps = new Person("","",null,null);
-                    ps.setName(dados[0]);
-                    ps.setCpf(dados[1]);
-                    Sexo sext;
-                    if(dados[2].toLowerCase().charAt(0) == 'f'){
-                        sext = Sexo.mulher;
-                    }else{
-                        sext = Sexo.homem;
-                    }
-                    ps.setSex(sext);
-                    PriorityGroup prit ;
-                    switch(dados[3]){
-                        case "Trabalhador da Sa�de":
-                            prit = PriorityGroup.HEALH_GROUP;
-                            break;
-                        case "Portador de idade igual ou superior a 60 anos":
-                            prit = PriorityGroup.OLDER_GROUP;
-                            break;
-                        case "Ind�gena residente em terras ind�genas":
-                            prit = PriorityGroup.INDIGENA_GROUP;
-                            break;
-                        case "Portador de comorbidades":
-                            prit = PriorityGroup.COMORBITIES_GROUP;
-                            break;
-                        case "Funcion�rio do sistema de priva��o de liberdade":
-                            prit = PriorityGroup.PRISON_GROUP;
-                            break;
-                        case "Membro de for�as de seguran�a e salvamento":
-                            prit = PriorityGroup.SECURITY_GROUP;
-                            break;
-                        case "Trabalhador da educa��o":
-                            prit = PriorityGroup.EDUCATION_GROUP;
-                            break;
-                        default :
-                            prit = null;
-                            
-                        }
-                        ps.setPriorityGroup(prit);
-                        if(dados[4].charAt(0) == 'f'){
-                            ps.setIsVaccinated(false);
-                            people.add(ps);
-                        }else{
-                            ps.setIsVaccinated(true);
-                            VaccinationRecord vr = new VaccinationRecord(ps, null, null, null);
-                            SimpleDateFormat datat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
-                            Date datet = datat.parse(dados[5]);
-                            vr.setApplicationDate(datet);
-                            Manufacturer mt;
-                            switch(dados[6]){
-                                case "Sinovac":
-                                    mt = Manufacturer.sinovac;
-                                    break;
-                                case "AstraZeneca":
-                                    mt = Manufacturer.astraZeneca;
-                                    break;
-                                case "Pfizer":
-                                    mt = Manufacturer.pfizer;
-                                    break;
-                                case "Janssen":
-                                    mt = Manufacturer.Janssen;
-                                    break;
-                                default:
-                                    mt = null;
-                            }
-                            vr.setManufacturer(mt);
-                            Dose ds;
-                            switch(dados[8]){
-                                case "Primeira":
-                                    ds = Dose.firts;
-                                    break;
-                                case "Segunda":
-                                    ds = Dose.second;
-                                    break;
-                                case "Unica":
-                                    ds = Dose.unique;
-                                    break;
-                                default:
-                                    ds = null;
-                            }
-                            vr.setDose(ds);
-                            vaccinationRecords.add(vr);
-                        }
-                    }
-            }    
+            }
             sc1.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public void writeBdp(){
-        File file = new File("BDP.txt");
+
+    public void writeBd(){
+        File file = new File("BD.txt");
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(file));
             Iterator<Person> wPIterator = people.iterator();
@@ -194,17 +134,6 @@ public class Repository {
                 bw.write(wPIterator.next().toString());
                 bw.newLine();
             }
-            bw.flush();
-            bw.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    public void writeBdv(){
-        File file = new File("BDV.txt");
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(file));
             Iterator<VaccinationRecord> wVRIterator = vaccinationRecords.iterator();
             while(wVRIterator.hasNext()){
                 bw.write(wVRIterator.next().toString());
