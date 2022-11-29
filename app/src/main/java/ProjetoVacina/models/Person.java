@@ -17,6 +17,13 @@ public class Person {
         this.priorityGroup = priorityGroup;
         isVaccinated = false;
     }
+    public Person(String name, String cpf, Sexo sex, PriorityGroup priorityGroup,boolean isVaccinated){
+        this.name = name;
+        this.cpf = cpf;
+        this.sex = sex;
+        this.priorityGroup = priorityGroup;
+        this.isVaccinated = isVaccinated;
+    }
 
     public boolean getIsVaccinated(){
         return this.isVaccinated;
@@ -31,6 +38,28 @@ public class Person {
     }
     public String getName(){
         return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public void setSex(Sexo sex) {
+        this.sex = sex;
+    }
+
+    public void setPriorityGroup(PriorityGroup priorityGroup) {
+        this.priorityGroup = priorityGroup;
+    }
+
+
+    @Override
+    public String toString() {
+        return name + ";" + cpf + ";" + sex + ";" + priorityGroup + ";" + isVaccinated;
     }
 
     public PriorityGroup getPriorityGroup(){

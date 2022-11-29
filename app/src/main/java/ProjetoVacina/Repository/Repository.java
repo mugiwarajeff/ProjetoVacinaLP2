@@ -1,4 +1,10 @@
 package ProjetoVacina.Repository;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -8,11 +14,93 @@ import ProjetoVacina.models.VaccinationRecord;
 import ProjetoVacina.models.SignaturesObjects.Dose;
 import ProjetoVacina.models.SignaturesObjects.Manufacturer;
 import ProjetoVacina.models.SignaturesObjects.PriorityGroup;
+import ProjetoVacina.models.SignaturesObjects.Sexo;
 
 public class Repository {
     
     private LinkedList<Person> people = new LinkedList<Person>();
     private LinkedList<VaccinationRecord> vaccinationRecords = new LinkedList<VaccinationRecord>();
+
+    public void readBd(){
+        File file = new File("BD.txt");
+        FileInputStream fi;
+        try {
+            fi = new FileInputStream(file);
+            Scanner sc1 = new Scanner(fi, "UTF-8");
+            while(sc1.hasNext()){
+                String linha = sc1.nextLine();
+                if(linha != null && !linha.isEmpty()){
+                    String[] dados = linha.split("\\;");
+                    Person ps = new Person("","",null,null);
+                    ps.setName(dados[0]);
+                    ps.setCpf(dados[1]);
+                    Sexo sext;
+                    if(dados[2].toLowerCase().charAt(0) == 'f'){
+                        sext = Sexo.mulher;
+                    }else{
+                        sext = Sexo.homem;
+                    }
+                    ps.setSex(sext);
+                    PriorityGroup prit ;
+                    switch(dados[3]){
+                        case "Trabalhador da Sa�de":
+                            prit = PriorityGroup.HEALH_GROUP;
+                            break;
+                        case "Portador de idade igual ou superior a 60 anos":
+                            prit = PriorityGroup.OLDER_GROUP;
+                            break;
+                        case "Ind�gena residente em terras ind�genas":
+                            prit = PriorityGroup.INDIGENA_GROUP;
+                            break;
+                        case "Portador de comorbidades":
+                            prit = PriorityGroup.COMORBITIES_GROUP;
+                            break;
+                        case "Funcion�rio do sistema de priva��o de liberdade":
+                            prit = PriorityGroup.PRISON_GROUP;
+                            break;
+                        case "Membro de for�as de seguran�a e salvamento":
+                            prit = PriorityGroup.SECURITY_GROUP;
+                            break;
+                        case "Trabalhador da educa��o":
+                            prit = PriorityGroup.EDUCATION_GROUP;
+                            break;
+                        default :
+                            prit = null;
+                            
+                        }
+                        ps.setPriorityGroup(prit);
+                        boolean vd;
+                        if(dados[4].charAt(0) == 'f'){
+                            vd = false;
+                        }else{
+                            vd = true;
+                        }
+                        ps.setIsVaccinated(vd);
+                        people.add(ps);
+                    }
+                }
+            sc1.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }    
+    }   
+    public void writeBd(){
+        File file = new File("BD.txt");
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+            Iterator<Person> wIterator = people.iterator();
+            while(wIterator.hasNext()){
+                bw.write(wIterator.next().toString());
+                bw.newLine();
+            }
+            //bw.write(newPerson.toString()+"\n");
+            bw.flush();
+            bw.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public LinkedList<Person> getPeopleList(){
         return this.people;
@@ -80,7 +168,6 @@ public class Repository {
                 if(vaccinationTemp.getPerson().getCpf().equals(person.getCpf())){
                     return true;
                 }
-
             }
         return false;
     }

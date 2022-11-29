@@ -1,5 +1,9 @@
 package ProjetoVacina.utils;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -71,8 +75,6 @@ public class UtilPerson {
 
         Person newPerson = new Person(name, cpf, sexo, priorityGroup);
         people.add(newPerson);
-
-
     }
 
     private static void listSexoOptions(){
