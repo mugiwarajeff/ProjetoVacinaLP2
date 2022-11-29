@@ -21,4 +21,18 @@ public class Manufacturer {
     public String getName(){
         return this.name;
     }
+
+    @Override
+    public String toString() {
+        return name + ";" + quantDoses;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setQuantDoses(int quantDoses) {
+        this.quantDoses = quantDoses;
+    }
+    
 }

@@ -42,4 +42,26 @@ public class VaccinationRecord {
         System.out.println("Dose: " + dose.getTipo());
     }
 
+    @Override
+    public String toString() {
+        return person + ";" + applicationDate + ";" + manufacturer + ";" + dose;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public void setApplicationDate(Date applicationDate) {
+        this.applicationDate = applicationDate;
+    }
+
+    public void setManufacturer(Manufacturer manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public void setDose(Dose dose) {
+        this.dose = dose;
+    }
+    
+
 }

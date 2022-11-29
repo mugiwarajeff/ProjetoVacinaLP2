@@ -1,0 +1,4 @@
+joao;222-222-222-22;Masculino;Funcion�rio do sistema de priva��o de liberdade;true;Tue Nov 29 12:24:55 BRT 2022;AstraZeneca;2;Primeira
+jeff;234-234-234-23;Masculino;Ind�gena residente em terras ind�genas;true;Tue Nov 29 15:07:42 BRT 2022;Pfizer;2;Primeira
+jeff;234-234-234-23;Masculino;Ind�gena residente em terras ind�genas;true;Tue Nov 29 15:08:36 BRT 2022;Pfizer;2;Segunda
+tamara;123-123-123-12;Feminino;Ind�gena residente em terras ind�genas;true;Tue Nov 29 15:07:14 BRT 2022;Janssen;1;Unica
