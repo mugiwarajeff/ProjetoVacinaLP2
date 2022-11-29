@@ -67,8 +67,7 @@ public class Repository {
                             prit = PriorityGroup.EDUCATION_GROUP;
                             break;
                         default :
-                            prit = null;
-                            
+                            prit = null; 
                     }
                     ps.setPriorityGroup(prit);
                     if(dados[4].charAt(0) == 'f'){
@@ -141,7 +140,6 @@ public class Repository {
             }
             bw.flush();
             bw.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
