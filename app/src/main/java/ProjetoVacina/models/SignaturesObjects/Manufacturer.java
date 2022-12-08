@@ -24,10 +24,6 @@ public class Manufacturer implements Serializable{
         return this.name;
     }
 
-    @Override
-    public String toString() {
-        return name + ";" + quantDoses;
-    }
 
     public void setName(String name) {
         this.name = name;

@@ -21,14 +21,5 @@ public class Dose implements Serializable {
     public static boolean compareDoseTypes(Dose dose1, Dose dose2){
         return dose1 == dose2;
     }
-
-    @Override
-    public String toString() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
     
 }

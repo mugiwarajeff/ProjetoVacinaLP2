@@ -19,13 +19,6 @@ public class Person implements Serializable{
         this.priorityGroup = priorityGroup;
         isVaccinated = false;
     }
-    public Person(String name, String cpf, Sexo sex, PriorityGroup priorityGroup,boolean isVaccinated){
-        this.name = name;
-        this.cpf = cpf;
-        this.sex = sex;
-        this.priorityGroup = priorityGroup;
-        this.isVaccinated = isVaccinated;
-    }
 
     public boolean getIsVaccinated(){
         return this.isVaccinated;
@@ -56,12 +49,6 @@ public class Person implements Serializable{
 
     public void setPriorityGroup(PriorityGroup priorityGroup) {
         this.priorityGroup = priorityGroup;
-    }
-
-
-    @Override
-    public String toString() {
-        return name + ";" + cpf + ";" + sex + ";" + priorityGroup + ";" + isVaccinated;
     }
 
     public PriorityGroup getPriorityGroup(){

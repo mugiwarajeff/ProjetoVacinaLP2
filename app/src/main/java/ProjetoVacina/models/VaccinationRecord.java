@@ -43,11 +43,6 @@ public class VaccinationRecord implements Serializable{
         System.out.println("Dose: " + dose.getTipo());
     }
 
-    @Override
-    public String toString() {
-        return person + ";" + applicationDate + ";" + manufacturer + ";" + dose;
-    }
-
     public void setPerson(Person person) {
         this.person = person;
     }
