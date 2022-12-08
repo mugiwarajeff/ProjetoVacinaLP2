@@ -1,11 +1,12 @@
 package ProjetoVacina.models;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import ProjetoVacina.models.SignaturesObjects.Dose;
 import ProjetoVacina.models.SignaturesObjects.Manufacturer;
 
-public class VaccinationRecord {
+public class VaccinationRecord implements Serializable{
     Person person;
     Date applicationDate;
     Manufacturer manufacturer;

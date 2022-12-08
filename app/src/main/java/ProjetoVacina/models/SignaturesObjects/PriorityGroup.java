@@ -1,6 +1,8 @@
 package ProjetoVacina.models.SignaturesObjects;
 
-public class PriorityGroup {
+import java.io.Serializable;
+
+public class PriorityGroup implements Serializable{
     private String tipo;
 
     private PriorityGroup(String tipo){

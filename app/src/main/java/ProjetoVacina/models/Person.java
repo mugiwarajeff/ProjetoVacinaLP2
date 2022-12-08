@@ -1,9 +1,11 @@
 package ProjetoVacina.models;
 
+import java.io.Serializable;
+
 import ProjetoVacina.models.SignaturesObjects.PriorityGroup;
 import ProjetoVacina.models.SignaturesObjects.Sexo;
 
-public class Person {
+public class Person implements Serializable{
     private String name;
     private String cpf;
     private Sexo sex;
