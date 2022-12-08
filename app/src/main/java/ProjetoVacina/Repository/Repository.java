@@ -1,6 +1,8 @@
 package ProjetoVacina.Repository;
 import java.io.EOFException;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -42,6 +44,9 @@ public class Repository implements Runnable{
         } catch(EOFException e) {
         	people = new LinkedList<Person>();
             vaccinationRecords = new LinkedList<VaccinationRecord>();
+        } catch(FileNotFoundException e){
+            new File("BD.txt");
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
