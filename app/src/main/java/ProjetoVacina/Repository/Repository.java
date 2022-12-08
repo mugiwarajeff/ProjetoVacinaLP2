@@ -20,11 +20,15 @@ public class Repository implements Runnable{
     private LinkedList<VaccinationRecord> vaccinationRecords = new LinkedList<VaccinationRecord>();
 
     public void run(){
-        writeBd();
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
+        Boolean loop = true;
+        while(loop){
+            writeBd();
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                loop = false;
+            }
         }
     }
 
