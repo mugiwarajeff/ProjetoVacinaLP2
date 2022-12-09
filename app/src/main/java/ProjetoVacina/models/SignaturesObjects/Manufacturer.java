@@ -1,6 +1,8 @@
 package ProjetoVacina.models.SignaturesObjects;
 
-public class Manufacturer {
+import java.io.Serializable;
+
+public class Manufacturer implements Serializable{
     private String name;
     private int quantDoses; 
 
@@ -21,4 +23,14 @@ public class Manufacturer {
     public String getName(){
         return this.name;
     }
+
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setQuantDoses(int quantDoses) {
+        this.quantDoses = quantDoses;
+    }
+    
 }

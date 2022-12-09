@@ -1,11 +1,12 @@
 package ProjetoVacina.models;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import ProjetoVacina.models.SignaturesObjects.Dose;
 import ProjetoVacina.models.SignaturesObjects.Manufacturer;
 
-public class VaccinationRecord {
+public class VaccinationRecord implements Serializable{
     Person person;
     Date applicationDate;
     Manufacturer manufacturer;
@@ -41,5 +42,22 @@ public class VaccinationRecord {
         System.out.println("Fornecedor de vacina: " + manufacturer.getName());
         System.out.println("Dose: " + dose.getTipo());
     }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    public void setApplicationDate(Date applicationDate) {
+        this.applicationDate = applicationDate;
+    }
+
+    public void setManufacturer(Manufacturer manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public void setDose(Dose dose) {
+        this.dose = dose;
+    }
+    
 
 }

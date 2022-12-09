@@ -16,7 +16,7 @@ public class App {
         
         boolean whileController = true;
         Scanner input = new Scanner(System.in);
-
+        repository.readBd();
         while(whileController){
             int opcao = 0;
             System.out.println("=======Menu de opções========");  
@@ -34,10 +34,12 @@ public class App {
                     input.nextLine();
                     UtilPerson.personRegister(repository.getPeopleList(), input);
                     System.out.println("Pessoa cadastrada com sucesso!");
+                    repository.writeBd(); 
                     break;
                 case 2: 
                     input.nextLine();
                     RegisterUtils.recordRegister(repository.getPeopleList(), repository.getVaccinationList(), input);
+                    repository.writeBd(); 
                     break;
                 case 3:
                     repository.searchRegisterByCPF(input);
@@ -59,7 +61,6 @@ public class App {
                 default:
                     System.out.println("Tentativa invalida, tente novamente...");
             }
-        }
-
+        } 
     }
 }

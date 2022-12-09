@@ -1,6 +1,8 @@
 package ProjetoVacina.models.SignaturesObjects;
 
-public class Dose {
+import java.io.Serializable;
+
+public class Dose implements Serializable {
 
     private String tipo;
 
@@ -19,4 +21,5 @@ public class Dose {
     public static boolean compareDoseTypes(Dose dose1, Dose dose2){
         return dose1 == dose2;
     }
+    
 }

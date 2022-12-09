@@ -71,8 +71,6 @@ public class UtilPerson {
 
         Person newPerson = new Person(name, cpf, sexo, priorityGroup);
         people.add(newPerson);
-
-
     }
 
     private static void listSexoOptions(){
