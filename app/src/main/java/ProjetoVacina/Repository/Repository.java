@@ -16,23 +16,10 @@ import ProjetoVacina.models.SignaturesObjects.Dose;
 import ProjetoVacina.models.SignaturesObjects.Manufacturer;
 import ProjetoVacina.models.SignaturesObjects.PriorityGroup;
 
-public class Repository implements Runnable{
+public class Repository {
     
     private LinkedList<Person> people = new LinkedList<Person>();
     private LinkedList<VaccinationRecord> vaccinationRecords = new LinkedList<VaccinationRecord>();
-
-    public void run(){
-        Boolean loop = true;
-        while(loop){
-            writeBd();
-            try {
-                Thread.sleep(10000);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                loop = false;
-            }
-        }
-    }
 
     @SuppressWarnings("unchecked")
     public void readBd(){
@@ -46,7 +33,6 @@ public class Repository implements Runnable{
             vaccinationRecords = new LinkedList<VaccinationRecord>();
         } catch(FileNotFoundException e){
             new File("BD.txt");
-            
         } catch (Exception e) {
             e.printStackTrace();
         }
